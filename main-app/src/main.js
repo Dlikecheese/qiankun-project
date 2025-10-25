@@ -2,6 +2,7 @@ import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
 import { registerMicroApps, start } from 'qiankun';
+// import { registerMicroApps, start } from './micro-fe';
 
 Vue.config.productionTip = false;
 
@@ -26,7 +27,14 @@ registerMicroApps([
   },
 ]);
 
-start();
+start({
+  sandBox: {
+    // strictStyleIsolation: true,// shadow DOM隔离
+    // experimentStyleIsolation: true, // 通过添加选择器范围解决样式冲突：如
+    // 所有样式都在div[data-qiankun="app-vue2"] 下：
+    //  sub-app1 div {}  =>  div[data-qiankun="app-vue2"] sub-app1 div{
+  },
+});
 
 new Vue({
   router,
